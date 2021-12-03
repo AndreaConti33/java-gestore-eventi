@@ -1,6 +1,5 @@
 package org.generation.italy.eventi;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -13,18 +12,63 @@ public class Main {
 		String sceltaUtentePositiva = "s";
 		String sceltaUtente;
 
-		System.out.println("Digitare il titolo dell'evento: ");
-		String inputTitolo = scanner.nextLine();
-		System.out.print("Inserisci il giorno dell'evento: ");
-		int giorno = scanner.nextInt();
-		System.out.print("Inserisci il mese: ");
-		int mese = scanner.nextInt();
-		System.out.print("Inserisci l'anno: ");
-		int anno = scanner.nextInt();
+		String inputTitolo;
+		do {
+			System.out.println("Digitare il titolo dell'evento: ");
+			inputTitolo = scanner.nextLine();
+			if (inputTitolo == null || inputTitolo.length() == 0) {
+				System.out.println("Valore nullo non accettabile.");
+			} else {
+				operazioneIncorso = true;
+			}
+		} while (operazioneIncorso == false);
+		operazioneIncorso = false;
+		int giorno;
+		int mese;
+		int anno;
+		do {
+			System.out.print("Inserisci il giorno dell'evento: ");
+			giorno = scanner.nextInt();
+			if (giorno < 0 || giorno > 31) {
+				System.out.println("Inserire un valore compreso tra \"1\" e \"31\".");
+			} else {
+				operazioneIncorso = true;
+			}
+		} while (operazioneIncorso == false);
+		operazioneIncorso = false;
+		do {
+			System.out.print("Inserisci il mese: ");
+			mese = scanner.nextInt();
+			if (mese <= 0 || mese > 12) {
+				System.out.println("Inserire un valore compreso tra \"1\" e \"12\".");
+			} else {
+				operazioneIncorso = true;
+			}
+		} while (operazioneIncorso == false);
+		operazioneIncorso = false;
+		do {
+			System.out.print("Inserisci l'anno: ");
+			anno = scanner.nextInt();
+			if (anno < 2021) {
+				System.out.println("Impossibile inserire un anno precedente a quello attuale.");
+			} else {
+				operazioneIncorso = true;
+			}
+		} while (operazioneIncorso == false);
+		operazioneIncorso = false;
 		LocalDate dataEvento = LocalDate.of(anno, mese, giorno);
-		System.out.println("Inserire numero massimo di partecipanti: ");
-		int inputPartecipanti = scanner.nextInt();
+		int inputPartecipanti;
+		do {
+			System.out.println("Inserire numero massimo di partecipanti: ");
+			inputPartecipanti = scanner.nextInt();
+			if (inputPartecipanti <= 0 || inputPartecipanti > 999) {
+				System.out.println("Inserire un valore compreso tra \"1\" e \"999\".");
+			} else {
+				operazioneIncorso = true;
+			}
+		} while (operazioneIncorso == false);
 
+		operazioneIncorso = false;
 		try {
 			Evento evento = new Evento(inputTitolo, dataEvento, inputPartecipanti);
 			System.out.println("Hai creato un nuovo evento di nome: " + inputTitolo + ", che si svolegerà il:  "
@@ -38,12 +82,23 @@ public class Main {
 				} else if (sceltaUtente.equals(sceltaUtenteNegativa)) {
 					System.out.println("Arrivederci");
 					main(args);
+				} else if (sceltaUtente == null || sceltaUtente.length() == 0) {
+					System.out.println("Valore nullo non accettabile.");
 				} else {
 					System.out.println("Attenzione, inserire un valore valido (s/n).");
 				}
 			} while (operazioneIncorso == false);
-			System.out.println("Quante prenotazioni vuoi fare?");
-			int prenotazioniUtente = scanner.nextInt();
+			operazioneIncorso = false;
+			int prenotazioniUtente;
+			do {
+				System.out.println("Quante prenotazioni vuoi fare?");
+				prenotazioniUtente = scanner.nextInt();
+				if (prenotazioniUtente <= 0 || prenotazioniUtente > inputPartecipanti) {
+					System.out.println("Inserire una valore compreso tra \"1\" e " + inputPartecipanti + ".");
+				} else {
+					operazioneIncorso = true;
+				}
+			} while (operazioneIncorso == false);
 			for (int i = 0; i < prenotazioniUtente; i++) {
 				evento.prenota();
 			}
@@ -61,14 +116,25 @@ public class Main {
 				} else if (sceltaUtente.equals(sceltaUtenteNegativa)) {
 					System.out.println("Arrivederci");
 					main(args);
+				} else if (sceltaUtente == null || sceltaUtente.length() == 0) {
+					System.out.println("Valore nullo non accettabile.");
 				} else {
 					System.out.println("Attenzione, inserire un valore valido (s/n).");
 				}
 			} while (operazioneIncorso == false);
-			System.out.println("Quante prenotazioni vuoi disdire?");
-			int disdireUtente = scanner.nextInt();
+			operazioneIncorso = true;
+			int disdireUtente;
+			do {
+				System.out.println("Quante prenotazioni vuoi disdire?");
+				disdireUtente = scanner.nextInt();
+				if (disdireUtente <= 0 || disdireUtente > prenotazioniUtente) {
+					System.out.println("Inserire un valore compreso tra \"1\" e " + prenotazioniUtente + ".");
+				} else {
+					operazioneIncorso = true;
+				}
+			} while (operazioneIncorso == false);
 			for (int i = 0; i < disdireUtente; i++) {
-				evento.desdici();
+				evento.disdici();
 			}
 			System.out.println("Hai disdetto " + disdireUtente + " prenotazioni, al momento ci sono "
 					+ (evento.getNumeroTotale() - evento.getNumeroPrenotati()) + " posti disponibili e "
