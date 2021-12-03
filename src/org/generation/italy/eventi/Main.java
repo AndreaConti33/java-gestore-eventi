@@ -81,7 +81,6 @@ public class Main {
 					operazioneIncorso = true;
 				} else if (sceltaUtente.equals(sceltaUtenteNegativa)) {
 					System.out.println("Arrivederci");
-					main(args);
 				} else if (sceltaUtente == null || sceltaUtente.length() == 0) {
 					System.out.println("Valore nullo non accettabile.");
 				} else {
@@ -115,7 +114,6 @@ public class Main {
 					operazioneIncorso = true;
 				} else if (sceltaUtente.equals(sceltaUtenteNegativa)) {
 					System.out.println("Arrivederci");
-					main(args);
 				} else if (sceltaUtente == null || sceltaUtente.length() == 0) {
 					System.out.println("Valore nullo non accettabile.");
 				} else {
