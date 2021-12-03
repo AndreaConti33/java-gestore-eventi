@@ -122,12 +122,12 @@ public class Main {
 					System.out.println("Attenzione, inserire un valore valido (s/n).");
 				}
 			} while (operazioneIncorso == false);
-			operazioneIncorso = true;
+			operazioneIncorso = false;
 			int disdireUtente;
 			do {
 				System.out.println("Quante prenotazioni vuoi disdire?");
 				disdireUtente = scanner.nextInt();
-				if (disdireUtente <= 0 || disdireUtente > prenotazioniUtente) {
+				if (disdireUtente <= 0 || disdireUtente > evento.getNumeroPrenotati()) {
 					System.out.println("Inserire un valore compreso tra \"1\" e " + prenotazioniUtente + ".");
 				} else {
 					operazioneIncorso = true;
