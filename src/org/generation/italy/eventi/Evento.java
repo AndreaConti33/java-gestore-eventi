@@ -67,8 +67,6 @@ public class Evento {
 	public void disdici() throws Exception {
 		if (data.isBefore(LocalDate.now())) {
 			throw new Exception("La data non può essere precedente a quella odierna.");
-		} else if (postiPrenotati == 0) {
-			throw new Exception("Non hai posti prenotati da disdire.");
 		} else {
 			postiPrenotati--;
 		}
