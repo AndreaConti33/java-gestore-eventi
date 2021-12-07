@@ -24,18 +24,9 @@ public class Main {
 		} while (operazioneIncorso == false);
 		operazioneIncorso = false;
 		int giorno;
-		int mese;
+		int mese = 0;
 		int anno;
-		do {
-			System.out.print("Inserisci il giorno dell'evento: ");
-			giorno = scanner.nextInt();
-			if (giorno < 0 || giorno > 31) {
-				System.out.println("Inserire un valore compreso tra \"1\" e \"31\".");
-			} else {
-				operazioneIncorso = true;
-			}
-		} while (operazioneIncorso == false);
-		operazioneIncorso = false;
+		int x;
 		do {
 			System.out.print("Inserisci il mese: ");
 			mese = scanner.nextInt();
@@ -45,6 +36,37 @@ public class Main {
 				operazioneIncorso = true;
 			}
 		} while (operazioneIncorso == false);
+		operazioneIncorso = false;
+		do {
+			System.out.print("Inserisci il giorno dell'evento: ");
+			giorno = scanner.nextInt();
+			switch (mese) { // assegnamo di default 31 giorni, il pi comodo
+			case 2:
+				x = 28; // se febbraio massimo 28 giorni
+				break;
+			case 4: // se aprile, giugno settembre, novembre 30 giorni altrimenti rimane 31
+				x = 30;
+				break;
+			case 6:
+				x = 30;
+				break;
+			case 9:
+				x = 30;
+				break;
+			case 11:
+				x = 30;
+				break;
+			default:
+				x = 31;
+				break;
+			}
+			if (giorno < 0 || giorno > x) {
+				System.out.println("Inserire un valore compreso tra \"1\" e \"" + x + "\"");
+			} else {
+				operazioneIncorso = true;
+			}
+		} while (operazioneIncorso == false);
+
 		operazioneIncorso = false;
 		do {
 			System.out.print("Inserisci l'anno: ");
